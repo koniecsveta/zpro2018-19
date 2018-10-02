@@ -47,31 +47,43 @@ základné komponenty C++ programu:
 
 ---
 Riadok 1: // my first program in C++
+
 Dve lomítka indukujú, že zvyšok riadku obsahuje programátorov komentár, ktorý ale nemá žiadny vplyv na chovanie programu. 
 Komentáre sa využívajú na popis kódu (krátke vysvetlenie, pozorovanie...)
 
+
 komentáre možno písať aj nasledovne /* block comment */
 
+
 Riadok 2: #include <iostream>
+    
 Riadky, ktoré sa začínajú znakom # su špeciálne riadky, ktoré preprocesor spracuje ešte pred skompilovaním programu. 
 Konkrétne tento riadok inštruuje preprocesor, že má zahrnúť časť štandardného c++ kódu, ktorý umožní výpis
 výstupu na obrazovku
 
+
 Riadok 3: prázdny riadok
+
 Prázdne riadky nemajú na program žiadny efekt, ale môžu zlepšiť čitateľnosť kódu
 
+
 Riadok 4:  int main ()
+
 Tymto riadkom sa zacina deklaracia funkcie (=zjednodušene skupina príkazov, ktorým dáme nejaký názov). Tu dávame názov
 "main" skupine príkazov, ktoré ďalej nasledujú. (viac k funkciám v neskorších hodinách)
 
 Funkcia ktorá je pomenovaná main je vo všetkých c++ programoch špeciálna - je to funkcia, 
 ktorá sa zavolá, keď sa program spustí, tj. spustenie všetkých c++ programov sa začína funkciou main.
 
+
 Riadky 5 and 7: { a }
+
 Indikujú začiatok a koniec definície funkcie. Všetko medzi nimi naz. telo funkcie = definícia toho, čo sa stane keď sa
 zavolá funckia main.
 
+
 Riadok 6: std::cout << "Hello World!";
+
 Príkaz zložený z 3 častí: std::cout identifikuje výstupné zariadenie (obrazovku). Operátor << indikuje, že to čo následuje za
 ním bude vložené do std::count. Veta "Hello world!" predstavuje obsah vložený na obrazovku. Každý príkaz končí v C++ znakom ; .
 
@@ -97,7 +109,7 @@ cout je súčasťou štandardnej knižnice a všetky prvky Štandardnej c++ kni�
 
 
 ## pouzitie
-
+```c++
 #include <iostream>
 using namespace std;
 int main( ) {
@@ -106,7 +118,7 @@ int main( ) {
   cin >> name;
   cout << "Your name is: " << name << endl;
 }
-
+```
 
 
 
