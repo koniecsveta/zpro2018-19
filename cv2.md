@@ -114,7 +114,7 @@ a vo všetkých ostatných funkciách musíme písať správny return výraz vra
 
 
 # Cyklus a rozhodovanie
-##Podmienka If
+## Podmienka If
 
 Syntax
 
@@ -145,11 +145,11 @@ else
  
  
  
- ##Cyklus
+ ## Cyklus
  Cyklus opakuje príkaz určitý počet krát alebo dovtedy, kým je splnená istá podmienka.
  Cykly do programu zavádzame kľučovými slovami while, do, a for.
  
-##while 
+### while 
 
 Syntax 
 
@@ -175,7 +175,7 @@ int main ()
 }
 ``` 
 
-##do-while 
+### do-while 
 syntax
 
 do príkaz while (podmienka);
@@ -199,7 +199,7 @@ int main ()
   } while (str != "goodbye");
 }
   ```
- ##for
+ ### for
  syntax
  for (inicializácia; podmienka; inkrementácia) príkaz;
  
