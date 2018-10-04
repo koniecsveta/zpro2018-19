@@ -221,9 +221,10 @@ int main ()
 ```
  
   
-  
  
 
 
 
 ÚLOHA: napíšte funkciu, ktorá vypočíta faktoriál čísla n
+
+
