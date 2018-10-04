@@ -17,6 +17,8 @@ DOPORUČENÉ ZDROJE:
 
 http://www.cplusplus.com
 
+https://en.cppreference.com/w/
+
 https://app.codility.com/programmers/lessons
     
  ---
