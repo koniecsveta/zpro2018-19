@@ -149,7 +149,7 @@ else
  Cyklus opakuje príkaz určitý počet krát alebo dovtedy, kým je splnená istá podmienka.
  Cykly do programu zavádzame kľučovými slovami while, do, a for.
  
-###while 
+##while 
 
 Syntax 
 
@@ -175,7 +175,7 @@ int main ()
 }
 ``` 
 
-###do-while 
+##do-while 
 syntax
 
 do príkaz while (podmienka);
@@ -199,7 +199,7 @@ int main ()
   } while (str != "goodbye");
 }
   ```
- ###for
+ ##for
  syntax
  for (inicializácia; podmienka; inkrementácia) príkaz;
  
