@@ -1,48 +1,56 @@
 #include <iostream>
 using namespace std;
 
-int addition (int a, int b)
-{
-    int r;
-    r=a+b;
-    return r;
-}
-
-int subtraction (int a, int b)
-{
-    int r;
-    r=a-b;
-    return r;
-}
-
-//priklad funkcie ktora nevracia ziadnu hodnotu iba nieco vypisuje
-void printmessage ()
-{
-    cout << "I'm a function!";
-}
 
 int main ()
 {
-    //prvy priklad
+    int x = 100;
 
-    int z;
-    z = addition (5,3);
-    cout << "The result of 5 + 3 is " << z << '\n';
+    //if podmienka, ktora vypise ci je v premennej x ulozena hodnota 100
+    if (x == 100)
+        cout << "x is 100";
+    else
+        cout << "x is not 100";
+
     cout << '\n';
 
-    //druhy priklad
-    int x=5, y=3;
-    z = subtraction (7,2);
-    cout << "7 - 2 is " << z << '\n';
-    cout << "I can get " << subtraction (7,2) <<  " also like this" << '\n';
-    cout << "5 - 3 is " << subtraction (x,y) <<  '\n';
-    z= 4 + subtraction (x,y);
-    cout << "4 + 5 - 3 is " << z << '\n';
+    //spajanie if podmienok
+    if (x > 0)
+        cout << "x is positive";
+    else if (x < 0)
+        cout << "x is negative";
+    else
+        cout << "x is 0";
+
     cout << '\n';
 
-    //treti priklad
-    printmessage ();
+    //odpocitavanie s vyuzitim while cyklu
+    int n = 10;
+
+    while (n>0) {
+        cout << n << ", ";
+        --n;
+    }
+    cout << "liftoff!\n";
+
     cout << '\n';
+
+    //ozvena s vyuzitim do while cyklu
+    string str;
+    do {
+        cout << "Enter text: ";
+        getline (cin,str);
+        cout << "You entered: " << str << '\n';
+    } while (str != "goodbye");
+
+    cout << '\n';
+
+    //odpocitavanie s vyuzitim for cyklu
+    for (int n=10; n>0; n--) {
+        cout << n << ", ";
+    }
+    cout << "liftoff!\n";
+
 
 }
 

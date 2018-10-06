@@ -158,10 +158,11 @@ while (podmienka) príkaz
  Cyklus while opakuje príkaz dovtedy, kým je podmienka pravdivá, tj true. Ak po niektorom spustení príkazu začne byť podmienka 
  nepravdivá, cyklus sa ukončí  a program pokračuje ďalej.
 
- custom countdown using while
+ odpočitavanie s využitím  while cyklu
+  ```c++
 #include <iostream>
 using namespace std;
- ```c++
+
 int main ()
 {
   int n = 10;
