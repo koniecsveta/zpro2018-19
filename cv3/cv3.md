@@ -1,0 +1,621 @@
+Ut 9.10.2018
+
+ÚLOHA: napíšte funkciu int max(int a, int b){ ... } ktorá vráti maximum čísel a a b 
+
+
+
+# Dátové typy
+
+Hodnoty premenných sa ukladajú do pamäte v podobne jednotiek a núl
+
+- program nepotrebuje vedieť presné miesto kde je premenná uložená, pretože sa na ňu môže odkázať jej názvom
+- program potrebuje vedieť druh dát uložených v premennej, pretože je rozdiel ukladať napr. celé číslo a číslo s desatinnou
+čiarkou - aj keď sú obe reprezentované nulami a jednotkami, sú interpretované iným spôsobom a môžu v pamäti zaberať 
+rôzne množstvo pamäte
+
+## Primitívne dátové typy
+sú základné úložné jednotky, pomocou ktorých môžeme tvoriť nové zložené typy.
+
+Doteraz sme sa už s niektorými stratli - napr. int, void, char..
+
+Klasifikácia:
+
+
+- Znakové typy: reprezentujú jeden znak, napríklad "A" alebo "$"
+
+- Celočíselné typy: reprezentujú celočíselnú hodnotu, napr. 7 alebo 1024. Existujú v rôznych veľkostiach a 
+môžu byť buď signed alebo unsigned v závislosti od toho, či podporujú záporné hodnoty, alebo nie.
+
+- Typy čísel s pohyblivou desatinnou čiarkou: reprezentujú reálne hodnoty, napr. 3,14 alebo 0,01, s rôznymi 
+úrovňami presnosti, v závislosti od toho, ktorý z troch typov s pohyblivou desatinnou čiarkou sa používa.
+
+- Booleovský typ: reprezentuje iba jeden z dvoch stavov, true alebo false.
+
+| Group| Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
+<table>
+    <thead>
+        <tr>
+            <th>Názov</th>
+            <th>Bitov</th>
+            <th>Význam</th>
+            <th>Príklad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td >char</td>
+            <td rowspan=2>8</td>
+            <td>celé číslo, znak</td>
+            <td>0, 255, 'a', 'A', 'e'</td>
+        </tr>
+        <tr>
+               <td >short int</td>
+               <td rowspan=2>16</td>
+               <td>krátke celé číslo</td>
+               <td>65535, -32767</td>
+        </tr>
+        <tr>
+            <td>int</td>
+            <td>16/32</td>
+            <td>celé číslo</td>
+            <td>--||--</td>
+        </tr>
+        <tr>
+                    <td >long int</td>
+                    <td>32</td>
+                     <td>dlhé celé číslo</td>
+                     <td>--||--</td>
+        </tr>
+        <tr>
+            <td >long long int</td>
+            <td>64</td>
+            <td>ešte dlhšie celé číslo</td>
+            <td>9223372036854775807, -9223372036854775807</td>
+        </tr>
+         <tr>
+                    <td >float</td>
+                    <td>32</td>
+                    <td>reálne číslo</td>
+                    <td>95.0, -5.0</td>
+                </tr>
+         <tr>
+             <td >double</td>
+             <td>64</td>
+             <td>reálne číslo s dvojtou presnosťou</td>
+             <td>5.0l, 5l, -5.0L</td>
+         </tr>
+          <tr>
+                             <td >long double</td>
+                             <td>80</td>
+                             <td>veľmi dlhé reálne číslo</td>
+                             <td>5.5L, 5l, -5.0l</td>
+           </tr>
+           <tr>
+               <td >bool</td>
+               <td>8</td>
+               <td>logická hodnota</td>
+               <td>true, false</td>
+                                   </tr>
+    </tbody>
+</table>
+
+
+kompletnú tabuľku nájdete napr. na wikipedii https://en.wikibooks.org/wiki/C_Programming/Language_Reference#Table_of_Data_Types
+
+Platí, že sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long) a že: sizeof(char) = 1 
+(1 byte) 2), inak ale veľkosť dátových typov nie je štandardom daná pevne a závisí od procesora. 
+Na 16-bitovom procesore bude mať int veľkosť 16 bitov, na 64-bitovom procesore zase 64-bitov. 
+Kvôli spätnej kompatibilite sa ale môže stať, že 64-bitový prekladač bude pre int používať iba 32 bitov.
+
+
+Pri výbere vhodného dátového typu bysme mali počítať s tým, že rozsah dátového typu sa líši počítač od 
+počítača. Ak máme pocit, že by mohlo dojsť k "pretečeniu" rozsahu, tj. do nejakej premennej sa pokúsime uložiť
+väčšie číslo než sa tam vojde, môžme na overenie veľkosti čisla použiť konštanty z knižnice <limits.h>:
+
+```c++
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+
+   printf("The number of bits in a byte %d\n", CHAR_BIT);
+
+   printf("The minimum value of SIGNED CHAR = %d\n", SCHAR_MIN);
+   printf("The maximum value of SIGNED CHAR = %d\n", SCHAR_MAX);
+   printf("The maximum value of UNSIGNED CHAR = %d\n", UCHAR_MAX);
+
+   printf("The minimum value of SHORT INT = %d\n", SHRT_MIN);
+   printf("The maximum value of SHORT INT = %d\n", SHRT_MAX); 
+
+   printf("The minimum value of INT = %d\n", INT_MIN);
+   printf("The maximum value of INT = %d\n", INT_MAX);
+
+   printf("The minimum value of CHAR = %d\n", CHAR_MIN);
+   printf("The maximum value of CHAR = %d\n", CHAR_MAX);
+  
+   return(0);
+}
+```
+
+ZÁVER: Keď počítač počíta s nejakými číslami, musí ich mať uložené niekde v pamäti. Toto miesto v pamäti 
+získame tak, že vytvoríme premennú. A aby počítač vedel, koľko miesta má premennej v pamäti dať, musíme
+premennej určiť dátový typ.
+
+
+PRÍKLAD
+```c++
+#include <stdio.h>
+int a;
+
+int main(void)
+{
+    //deklarácia premenných = informujeme kompilátor o tom, akú veľkosť má v pamati pre premennú vyhradiť a ako má interpretovať jej hodnotu.
+                              
+    unsigned int b;
+    float c;
+
+    //inicializácia premenných
+    a = 5;
+    b = 11;
+    a = a / 2;
+    c = 5.0;
+    cout << "a=" << a << ", b=" << b << ", c=" <<c / 2 << endl;
+
+    return 0;
+}
+```
+
+Do premennej a sa dá uložiť iba celé číslo. Takže a/2, teda 5/2 je 2 a nie 2.5. Celé číslo (int) proste neukladá
+ desatinnú časť. Výsledok sa ani nezaokrúhlil, proste se „odsekol“.
+ 
+ÚLOHA: Skúste si do premennej b uložiť záporné číslo (napr. -11). 
+
+## Blok
+ = všetko, čo je medzi zloženými zátvorkami { a }. V príklade hore je jediný blok, a to telo funkcie main().
+  Všetky premenné, ktoré deklarujete v bloku, sú tzv. lokálne premenné a premenné mimo blok sú globálne. 
+  Lokálne premenné platia iba v tele bloku a v blokoch vnorených (inde ich prekladač nevidí, tj. inde, 
+  než v danom bloku, s nimi nemôžete pracovať).
+  
+ ## Premenné
+  = miesta kdesi v pamäti počítača, ktoré definujete v programe. Veľkosť miesta v pamäti závisí od dátového
+   typu premennej. Do premenných možno vkladať hodnoty, meniť ich a čítať. V príklade hore je vytvorená 
+   globálna premenná a (je mimo blok, tj. mimo telo funkcie main()) a dve lokálne premenné b a c.
+   
+   
+   ## Deklarácia premennej
+  - určujeme ňou aké premenné sa v programe objavia. Najskôr sa určí dátový typ, za ním názvy premenných oddelených 
+   čiarkou, končí středníkem
+   - pri deklarácii je možné do premennej rovno vložiť hodnotu
+   - názvy premenných nesmú obsahovať medzeru, diakritiku a nesmú začínať číslom.
+   - jazyk C rozlišuje malé a veľké písmená, takže môžete vytvoriť premenné s názvami Ahoj, ahoj, aHoj a program ich
+    bude chápať ako rôzne identifikátory (dobrý zvyk je na názvy premenných používať iba malé písmená)
+   
+
+```c++
+#include <stdio.h>
+int a;
+
+int main(void)
+{
+   unsigned int i,j,k;
+   signed int cislo1, cislo2 = cislo3 = 25;
+
+    return 0;
+}
+```
+
+Kým neurčíme akú ma premenná hodnotu, môže v nej byť akékoľvek číslo. Napr premenné cislo2 a cislo3 majú hodnotu 25,
+ale všetky ostatné obsahujú náhodnú hodnotu.
+
+Premenné môžu byť 
+- v jazyku C deklarované iba na začiatku bloku funkcie - hneď za úvodnou zátvorkou ({) 
+ (tzv. lokálne premenné), alebo na začiatku programu (globálne premenné). Lokálne premenné „existujú“ iba
+  v bloku, v ktorom sú definované (prípadne v blokoch v ňom vnorených) a nemožno ich používať mimo tento blok. 
+ - v jazyku C++ je možné deklarovať premenné takmer kdekoľvek, ale stále platí, že premenná má platnosť
+   iba v bloku, v ktorom je deklarovaná.
+   
+    
+       
+## Inicializácia premennej
+=priradenie hodnoty do premennej už pri deklarácii.
+
+3 spôsoby:
+-  c-like initialization: ```typ nazov_premennej  = pociatocna_hodnota;```
+- constructor initialization : ```typ nazov_premennej (pociatocna_hodnota);```
+- uniform initialization:  ```typ nazov_premennej {pociatocna_hodnota}; ```
+
+// initialization of variables
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main ()
+{
+  int a=5;               // initial value: 5
+  int b(3);              // initial value: 3
+  int c{2};              // initial value: 2
+  int result;            // initial value undetermined
+
+  a = a + b;
+  result = a - c;
+  cout << result;
+
+  return 0;
+}
+```
+
+ULOHA: POUŽITE FUNKCIE Z MINULEJ HODINY A OVERTE, ŽE SA VYPÍŠE ROVNAKÝ VÝSLEDOK (6)
+
+```c++
+#include <iostream>
+using namespace std;
+
+int main ()
+{
+  int a=5;               // initial value: 5
+  int b(3);              // initial value: 3
+  int c{2};              // initial value: 2
+  int result;            // initial value undetermined
+
+  a = sucet(a,b);
+  result = rozdiel(a,c);
+  cout << result;
+
+  return 0;
+}
+
+int sucet( ... 
+...
+...
+...
+
+
+```
+
+## Zložený dátový typ String
+- zložený dátový typ, s ktrým sme sa stretli už na minulej hodine
+
+- premenné tohto typu vedia uchovávať sekvencie znakov ako napr slová alebo vety.
+
+- rozdiel voči primitívnym dátovým typom je ten, že aby sme mohli deklarovať a používať
+objekt (premennú) tohto typu, do programu musíme zahrnúť hlavičku, kde je typ v rámci
+štandardnej knižnice definovaný (hlavička <string>)
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main ()
+{
+  string mystring;
+  mystring = "This is a string";
+  cout << mystring;
+  return 0;
+}
+
+```
+ÚLOHA: vyskúšajte premennú mystring inicializovať prostredníctvom všetkých troch spůsobom 
+inicializácie, ktoré sme dnes prebrali
+
+## Konštanty
+Ak sa nám hodí pomenovať nejakú koštantnú hodnotu, urobíme to nasledovne:
+
+```c++
+#include <iostream>
+using namespace std;
+
+const double pi = 3.14159;
+const char newline = '\n';
+
+int main ()
+{
+  double r=5.0;               // radius
+  double circle;
+
+  circle = 2 * pi * r;
+  cout << circle;
+  cout << newline;
+}
+
+...
+```
+
+ÚLOHA: napíšte funkcie, ```double objem_koule(double r){....}``` a ```double povrch_koule(double r){...}```, ktoré budú 
+vracať objem a povrch guľe a vypíšte ich výsledok.
+
+## Operátory
+### Priraďovací operátor (=)
+ - priraďuje hodnotu premennej 
+ 
+ 
+### Aritmetické operátory ( +, -, *, /, % )
+ - plus, mínus, násobenie, delenie, modulo 
+
+ 
+  ```c++
+  // assignment operator
+  #include <iostream>
+  using namespace std;
+  
+  int main ()
+  {
+    int a, b;         // a:?,  b:?
+    a = 10;           // a:10, b:?
+    b = 4;            // a:10, b:4
+    a = b;            // a:4,  b:4
+    b = 7;            // a:4,  b:7
+  
+    cout << "a:";
+    cout << a;
+    cout << " b:";
+    cout << b;
+    
+    	
+    x = 11 % 3;     //x:2
+  }
+  ```
+  
+  ### zložené priradenie (+=, -=, *=, /=, %=, >>=, <<=, &=, ^=, |=)
+ 
+ <table>
+     <thead>
+         <tr>
+             <th>Výraz</th>
+             <th>Ekvivalentný výraz</th>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             <td >y += x;</td>
+             <td >y = y + x;</td>
+         </tr>
+         <tr>
+                <td >x -= 5</td>
+                <td>x = x - 5</td>
+         </tr>
+         <tr>
+              <td>x /= y;</td>
+              <td>x = x / y;</td>
+         </tr>
+         <tr>
+              <td>price *= units + 1;</td>
+              <td>price = price * (units+1);</td>
+         </tr>
+          <tr>
+               <td>x %= y</td>
+               <td>x = x % y;</td>
+          </tr>
+     </tbody>
+ </table>
+ 
+
+atd. pre všetky ostatné, napr.:
+
+
+ ```c++
+#include <iostream>
+using namespace std;
+
+int main ()
+{
+    int x, y=3;
+    x = y;
+   
+    x+=2;             
+    cout << x;
+    cout << "Line 1 - Value of x is" << x << endl;
+  
+      // Bitove operatory
+     unsigned int a = 60;	/* 60 = 0011 1100 */
+     unsigned int b = 13;	/* 13 = 0000 1101 */
+     int c = 0;
+  
+     c = a & b;       /* 12 = 0000 1100 */
+     cout << "Line 2 - Value of c is" << c << endl;
+  
+     c = a | b;       /* 61 = 0011 1101 */
+     cout << "Line 3 - Value of c is" << c << endl;
+  
+     c = a ^ b;       /* 49 = 0011 0001 */
+     cout << "Line 4 - Value of c is" << c << endl;
+  
+     c = ~a;          /*-61 = 1100 0011 */
+     cout << "Line 5 - Value of c is" << c << endl;
+  
+     c = a << 2;     /* 240 = 1111 0000 */
+     cout << "Line 6 - Value of c is" << c << endl;
+  
+     c = a >> 2;     /* 15 = 0000 1111 */
+     cout << "Line 7 - Value of c is" << c << endl;   
+     
+  }
+ ```
+ ### inkrementácia a dekrementácia
+ 
+ Inkrementačný operátor (++) and dekrementačný operátor (--) zvyšuje alebo redukuje 
+ hodnotu premennej o jednotku. Sú ekvivalntné operátorom +=1 a -=1. Tj. výrazy 
+  ```x++; ```,  ``` x+=1; ```   a ``` x=x+1;``` sú ekvivalentné.
+  
+  Pozor treba dávať pri používaní tohto operátora ako sufix/prefix:
+  
+  ```c++
+  x = 3;
+  y = ++x;
+  // x obsahuje 4, y obsahuje 4
+   ``` 
+  hodnota priradená do y je hodnota x po inkrementácii 
+     
+                                                                   
+      ``` c++
+      x = 3;
+      y = x++;
+      // x obsahuje 4, y obsahuje 3
+       ``` 
+  hodnota priradená do y je hodnota x pred inkrementáciou 
+  
+  ### Relačné a porovnávacie operátory ( ==, !=, >, <, >=, <= )
+  
+  Slúžia na porovnávanie dvoch výrazov. Napr. na testovanie (ne)rovnosti dvoch hodnôt.
+ 
+ Výsledok takejto operácie je buť true alebo false, tj. boolean hodnota.
+ 
+  
+ <table>
+     <thead>
+         <tr>
+             <th>Operátor</th>
+             <th>Popis</th>
+         </tr>
+     </thead>
+     <tbody>
+         <tr>
+             <td >==</td>
+             <td >rovný</td>
+         </tr>
+         <tr>
+                <td >!=</td>
+                <td>nerovný</td>
+         </tr>
+         <tr>
+              <td><</td>
+              <td>menší než</td>
+         </tr>
+         <tr>
+              <td>></td>
+              <td>väčší než</td>
+         </tr>
+          <tr>
+               <td><=</td>
+               <td>menší alebo rovný než</td>
+          </tr>
+           <tr>
+                <td>>=</td>
+                <td>väčší alebo rovný než</td>
+           </tr> 
+     </tbody>
+ </table>
+ 
+ 
+ Porovnávať môžeme numerické konštanty:
+ ``` c++
+ (7 == 5)     // vyhodnotí sa na false
+ (5 > 4)      // vyhodnotí sa na true
+ (3 != 2)     // vyhodnotí sa na true
+ (6 >= 6)     // vyhodnotí sa na true
+ (5 < 5)      // vyhodnotí sa na false
+ ```
+ ale aj premenné a výrazy zložené z premenných. Nech a=2, b=3 and c=6:
+ ``` c++
+ (a == 5)     // vyhodnotí sa na false
+ (a*b >= c)   // vyhodnotí sa na true
+ (b+4 > a*c)  // vyhodnotí sa na false  
+ ((b=2) == a) // vyhodnotí sa na true
+ ```
+ 
+ 
+### Logické operátory( !, &&, || )
+
+Operátor ! je v C++ operátor pre operáciu negácie. Má iba jeden operand, po jeho pravej strane.
+Ak je hodnota operandu true, !operand má hodnotu false a ak je hodnota operandu false,
+!operand má hodnotu true.
+ 
+
+ ``` c++
+ !(5 == 5)   // evaluates to false because the expression at its right (5 == 5) is true
+ !(6 <= 4)   // evaluates to true because (6 <= 4) would be false
+ !true       // evaluates to false
+ !false      // evaluates to true 
+ ```
+ 
+ Operátor && zodpovedá logickej operácii konjunkcie (a zároveň) a  operátor || zodpovedá logickej
+ operácii disjunkcie (alebo). Tj operátor && vráti true ak sú oba jeho operandy 
+ pravdivé a vráti false vo všetkých ostatných prípadoch. Nasledujúca tabuľka 
+ znázorňuje výsledok operátora && pri vyhodnocovaní výrazu a&&b:
+ 
+
+   <table>
+       <thead>
+           <tr>
+               <th>a</th>
+               <th>b</th>
+               <th>a&&b</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td >true</td>
+               <td >true</td>
+               <td >true</td>
+           </tr>
+           <tr>
+                  <td >true</td>
+                  <td>false</td>
+                  <td >false</td>
+           </tr>
+           <tr>
+                <td >false</td>
+               <td >true</td>
+               <td >false</td>
+           </tr>
+           <tr>
+                <td >false</td>
+                <td >false</td>
+                <td >false</td>
+           </tr>  
+       </tbody>
+   </table>
+   
+   
+   Operátor ||  korešponduje s logickou operáciou disjunkcia (alebo), ktorá
+   vracia pravdu ak je aspoň jeden z operandov pravdivý a vracia nepravdu iba ak sú oba 
+   operandy nepravdivé.
+   Možné výsledky výrazu a||b:
+   
+     <table>
+          <thead>
+              <tr>
+                  <th>a</th>
+                  <th>b</th>
+                  <th>a||b</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td >true</td>
+                  <td >true</td>
+                  <td >true</td>
+              </tr>
+              <tr>
+                     <td >true</td>
+                     <td>false</td>
+                     <td >true</td>
+              </tr>
+              <tr>
+                   <td >false</td>
+                  <td >true</td>
+                  <td >true</td>
+              </tr>
+              <tr>
+                   <td >false</td>
+                   <td >false</td>
+                   <td >false</td>
+              </tr>  
+          </tbody>
+      </table>
+   
+   Napríklad:
+ ``` c++
+( (5 == 5) && (3 > 6) )  //  false ( true && false )
+( (5 == 5) || (3 > 6) )  // true ( true || false ) 
+ ``` 
+   
+ C++ vyhodnocuje zľava doprava iba to, čo je potrebné, tj. napr v príklade
+ ((5==5)||(3>6)) sa vyhodnotí, že 5==5 je true a už nikdy sa neskontroluje či 3>6 je 
+ true alebo false (toto funguje iba pre operátory && a ||)
+   
