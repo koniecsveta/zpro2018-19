@@ -15,6 +15,7 @@ môže byť v poli foo uložená buď sekvencia "Hello"
  "Vesele Vianoce"
  
   ![alt text](c_strings2-2.png)
+  
  pretože obe sekvencie sa skladajú z menej ako 20 znakov.
 
  
