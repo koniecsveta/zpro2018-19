@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-// porovna dve hodnoty typu int
+
+//porovna dve hodnoty typu int
 int compare (const void *a, const void *b)
 {
     // doplnte kod tejto funkcie
