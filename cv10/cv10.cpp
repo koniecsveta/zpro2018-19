@@ -52,7 +52,7 @@ void my_qsort (void *base, int n, int size, int(*compare)(const void*, const voi
 int main(int argc, char **argv)
 {
     int pole[10] = {1, 3, 2, 1, 6, 4, 8, 2, 3, 5};
-    // 3 je vecsie nez 2
+    // 3 je vacsie nez 2
     // printf("compare vraci %d\n", compare(&pole[1], &pole[2]));
 
     // 1 je mensie nez 6
