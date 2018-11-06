@@ -39,6 +39,9 @@ int main()
         /*doplnte*/; //inkrementacia dest_ptr
     }
 
+    /*
+      * doplnte vypis source_arr a dest_arr po kopirovani pomocou printArray()
+      * */
 
 
     return 0;
