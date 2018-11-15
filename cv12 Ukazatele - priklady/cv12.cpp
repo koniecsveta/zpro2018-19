@@ -16,7 +16,7 @@ int main()
 
     cout << pole <<endl;
 
-    *(pole) ='z';
+    *(pole + 1) ='z';
 
     cout << pole <<endl;
     cout << static_cast<void *>(&pole) <<endl;

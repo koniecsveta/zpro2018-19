@@ -7,15 +7,15 @@ int main()
     int num1, num2, sum;
     int *ptr1, *ptr2;
 
-    ptr1 = /*doplnte*/; // ptr1 stores the address of num1
-    ptr2 = /*doplnte*/; // ptr2 stores the address of num2
+    ptr1 = &num1/*doplnte*/; // ptr1 stores the address of num1
+    ptr2 = &num2/*doplnte*/; // ptr2 stores the address of num2
 
 
     printf("Enter number 1: ");
-    cin >> /*doplnte*/ ;
+    cin >> num1/*doplnte*/ ;
 
     printf("Enter number 2: ");
-    cin >> /*doplnte*/;
+    cin >> *ptr2/*doplnte*/;
 
     sum = *ptr1 + *ptr2;
 

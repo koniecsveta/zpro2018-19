@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-#define MAX_SIZE 100 // max nvelkost pola
+#define MAX_SIZE 100 // max velkost pola
 
 int main()
 {
@@ -18,8 +18,8 @@ cin >> N;
 
     for(i=0; i<N ; i++)
     {
-        cin >> /*doplnte*/;//nacita hodnotu tam, kam ukazuje ukazatl
-        /*doplnte*/;//posunie ukazatel na dalsi element pola
+        cin >> *ptr/*doplnte*/;//nacita hodnotu tam, kam ukazuje ukazatl
+        ptr++/*doplnte*/;//posunie ukazatel na dalsi element pola
     }
 
     ptr = arr;//ukazatel znovu ukazuje na prvy element pola
@@ -28,8 +28,8 @@ cin >> N;
 
     for(i=0; i<N ; i++)
     {
-        cout << /* doplnte*/;//vypis hodnoty na ktoru ukazuje zkazatel
-        /* doplnte*/;//posun ukazatela na dalsi element pola
+        cout << *ptr /* doplnte*/;//vypis hodnoty na ktoru ukazuje zkazatel
+        ptr++ /* doplnte*/;//posun ukazatela na dalsi element pola
     }
 
 
