@@ -2,6 +2,7 @@
 #include <string>
 #include <utility> // kvoli std::swap, ak nie ste C++11 kompatibilny, tak #include <algorithm>
 
+//pretypovana verzia z minuleho cvicenia
 void quick_sort (std::string *a, int n) {
     if (n < 2)
         return;
