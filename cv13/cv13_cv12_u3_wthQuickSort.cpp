@@ -12,9 +12,7 @@ using namespace std;
 /* deklaracie funkcii */
 void inputArray(int * arr, int size);
 int search(int * arr, int size, int toSearch);
-void quick_sort(int *left, int *right);
-int partition( int *a, int low, int high );
-void swap(int *x, int *y);
+void quick_sort (int *a, int n);
 void printArray(int *arr, int size);
 
 
@@ -55,7 +53,7 @@ int main()
     printArray(array, size);
 
     //sort
-    quick_sort(array, (array + size-1));
+    quick_sort(array, size);
 
     printArray(array, size);
 
@@ -128,15 +126,6 @@ int search(int * arr, int size, int toSearch)
 }
 
 
-
-void swap(int *x, int *y){
-
-    int temp;
-    temp = *x;
-    *x = *y;
-    *y = temp;
-}
-
 void printArray(int *arr, int size)
 {
     for(int i=0;i<size;i++)
@@ -147,32 +136,27 @@ void printArray(int *arr, int size)
     cout << endl;
 }
 
-int* choose_pivot(int *left, int *right) {
-    return &left[(right - left)/2];
-}
-
-int* partition(int *left, int *right, int *pivot) {
-    int *i, *q;
-    q = right;
-    i = left ;
-    while ( q > pivot ) {
-        while ( pivot < i )
-            pivot++;
-        while ( q > i )
-            q--;
-        if ( *q > *pivot ) {
-            swap(pivot,q);
+void quick_sort (int *a, int n) {
+    if (n < 2)
+        return;
+    int p = a[n / 2];
+    int *l = a;
+    int *r = a + n - 1;
+    while (l <= r) {
+        if (*l < p) {
+            l++;
+        }
+        else if (*r > p) {
+            r--;
+        }
+        else {
+            int t = *l;
+            *l = *r;
+            *r = t;
+            l++;
+            r--;
         }
     }
-    swap(left, q);
-    return q ;
-}
-
-void quick_sort(int *left, int *right) {
-    if(left >= right)
-        return;
-
-    int *pivot = partition(left, right, choose_pivot(left, right));
-    quick_sort(left, pivot-1);
-    quick_sort(pivot + 1, right);
+    quick_sort(a, r - a + 1);
+    quick_sort(l, a + n - l);
 }
